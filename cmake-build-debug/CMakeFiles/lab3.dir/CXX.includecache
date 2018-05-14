@@ -23,6 +23,8 @@ ctime
 -
 string
 -
+util.cpp
+/Users/luke1998/Desktop/OOP/lab3/lab3/util.cpp
 
 /Users/luke1998/Desktop/OOP/lab3/lab3/main.cpp
 main.h
@@ -49,6 +51,16 @@ iostream
 -
 warehouse.cpp
 /Users/luke1998/Desktop/OOP/lab3/lab3/warehouse.cpp
+
+/Users/luke1998/Desktop/OOP/lab3/lab3/util.cpp
+ctime
+-
+string
+-
+vector
+-
+unistd.h
+-
 
 /Users/luke1998/Desktop/OOP/lab3/lab3/warehouse.cpp
 vector

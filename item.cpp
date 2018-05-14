@@ -3,8 +3,12 @@
 //
 #include <ctime>
 #include <string>
+#include "util.cpp"
 
 using namespace std;
+
+const time_t str2Time(string dateStr);
+
 const enum itemType {
     fruit,
     oden,
@@ -13,7 +17,8 @@ const enum itemType {
     bread,
     lunch,
     milk,
-    yogurt
+    yogurt,
+    noType
 };
 
 itemType getType(string itemStr) {
@@ -33,6 +38,8 @@ itemType getType(string itemStr) {
         return milk;
     else if (itemStr == "yogurt")
         return yogurt;
+    else if (itemStr == "noitem")
+        return noType;
 }
 
 class item {
@@ -62,7 +69,11 @@ public:
         }
         return false;
     }
-
-
 };
 
+class noitem : public item {
+public:
+    noitem() : item("noitem", 0, 0, str2Time("1990/01/01")) {
+//        this->type = noType;
+    }
+};

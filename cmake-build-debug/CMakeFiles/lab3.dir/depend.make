@@ -6,5 +6,6 @@ CMakeFiles/lab3.dir/main.cpp.o: ../item.cpp
 CMakeFiles/lab3.dir/main.cpp.o: ../main.cpp
 CMakeFiles/lab3.dir/main.cpp.o: ../main.h
 CMakeFiles/lab3.dir/main.cpp.o: ../shop.cpp
+CMakeFiles/lab3.dir/main.cpp.o: ../util.cpp
 CMakeFiles/lab3.dir/main.cpp.o: ../warehouse.cpp
 

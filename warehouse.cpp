@@ -44,6 +44,16 @@ public:
         }
     }
 
+    item getItemOfCertainTypeRandomly(string itemtype) {
+        itemType itemType1 = ::getType(itemtype);
+        for (auto item1: items) {
+            if (item1.type == itemType1) {
+                return item1;
+            }
+        }
+        return noitem();
+    }
+
     void supplyItem(item item1) {
         items.push_back(item1);
         checkWarehouseSize(PURCHASE);
