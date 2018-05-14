@@ -6,4 +6,4 @@ set(CMAKE_CXX_STANDARD 11)
 add_executable(lab3
         main.cpp
         #        shop.cpp item.cpp main.h warehouse.cpp
-        familyMart.cpp)
+        )

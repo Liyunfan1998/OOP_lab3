@@ -80,9 +80,6 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/luke1998/Desktop/OOP/lab3/lab3/familyMart.cpp">
-			<Option target="lab3"/>
-		</Unit>
 		<Unit filename="/Users/luke1998/Desktop/OOP/lab3/lab3/main.cpp">
 			<Option target="lab3"/>
 		</Unit>

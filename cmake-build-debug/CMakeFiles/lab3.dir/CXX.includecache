@@ -6,6 +6,18 @@
 
 #IncludeRegexTransform: 
 
+/Users/luke1998/Desktop/OOP/lab3/lab3/familyMart.cpp
+iostream
+-
+fstream
+-
+stdlib.h
+-
+string
+-
+shop.cpp
+/Users/luke1998/Desktop/OOP/lab3/lab3/shop.cpp
+
 /Users/luke1998/Desktop/OOP/lab3/lab3/item.cpp
 ctime
 -
@@ -27,8 +39,8 @@ iostream
 -
 string
 -
-shop.cpp
-/Users/luke1998/Desktop/OOP/lab3/lab3/shop.cpp
+familyMart.cpp
+/Users/luke1998/Desktop/OOP/lab3/lab3/familyMart.cpp
 
 /Users/luke1998/Desktop/OOP/lab3/lab3/shop.cpp
 vector

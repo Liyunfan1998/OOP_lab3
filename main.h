@@ -9,5 +9,5 @@
 #include <ctime>
 #include <iostream>
 #include <string>
-#include "shop.cpp"
+#include "familyMart.cpp"
 #endif //LAB3_MAIN_H

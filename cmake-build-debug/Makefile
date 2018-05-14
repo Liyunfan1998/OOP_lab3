@@ -123,33 +123,6 @@ lab3/fast:
 	$(MAKE) -f CMakeFiles/lab3.dir/build.make CMakeFiles/lab3.dir/build
 .PHONY : lab3/fast
 
-familyMart.o: familyMart.cpp.o
-
-.PHONY : familyMart.o
-
-# target to build an object file
-familyMart.cpp.o:
-	$(MAKE) -f CMakeFiles/lab3.dir/build.make CMakeFiles/lab3.dir/familyMart.cpp.o
-.PHONY : familyMart.cpp.o
-
-familyMart.i: familyMart.cpp.i
-
-.PHONY : familyMart.i
-
-# target to preprocess a source file
-familyMart.cpp.i:
-	$(MAKE) -f CMakeFiles/lab3.dir/build.make CMakeFiles/lab3.dir/familyMart.cpp.i
-.PHONY : familyMart.cpp.i
-
-familyMart.s: familyMart.cpp.s
-
-.PHONY : familyMart.s
-
-# target to generate assembly for a file
-familyMart.cpp.s:
-	$(MAKE) -f CMakeFiles/lab3.dir/build.make CMakeFiles/lab3.dir/familyMart.cpp.s
-.PHONY : familyMart.cpp.s
-
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -186,9 +159,6 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... lab3"
-	@echo "... familyMart.o"
-	@echo "... familyMart.i"
-	@echo "... familyMart.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

@@ -18,7 +18,6 @@ class shop {
 public:
     warehouse *wh = noWarehouse();
     float salesRecord;
-    vector<item> items;
 
     void sell(item item1) {
         wh->useItem(item1);
