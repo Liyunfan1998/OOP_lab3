@@ -74,7 +74,8 @@ string getCurrentParentDir() {
     string::size_type idx2 = ppwd.find(string1);
     if (idx2 != string::npos) {
         ppwd = ppwd.substr(0, ppwd.length() - string1.length() + 1);
-        std::cout << "PWD: " << ppwd << std::endl;
+
     }
+    std::cout << "PWD: " << ppwd << std::endl;
     return ppwd;
 }
