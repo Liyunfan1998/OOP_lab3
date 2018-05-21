@@ -59,7 +59,10 @@ const time_t str2Time(string dateStr) {
     date.tm_year = y;
     date.tm_mon = m;
     date.tm_mday = d;
-    time_t dt = mktime(&date);
+    time_t dt;
+    struct tm *timeinfo;
+    timeinfo = localtime(&dt);
+    dt = mktime(timeinfo);
     return dt;
 }
 

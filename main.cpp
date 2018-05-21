@@ -49,8 +49,9 @@ int main() {
 //        std::cout << " " << a[i];
 //    std::cout << std::endl;
     familyMart familyMart1;
-    ppwd = getCurrentParentDir();
-    cout << ppwd << endl;
+//    ppwd = getCurrentParentDir();
+    ppwd = "";
+//    cout << ppwd << endl;
     familyMart1.loadFromShopFile(ppwd + "shop.txt");
 //    familyMart1.loadFromSellFile(ppwd + "sell.txt");
 //    familyMart1.loadFromPurchaseFile(ppwd + "purchase.txt");

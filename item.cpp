@@ -9,7 +9,7 @@ using namespace std;
 
 const time_t str2Time(string dateStr);
 
-const enum itemType {
+enum itemType {
     fruit,
     oden,
     bun,

@@ -86,7 +86,7 @@ public:
                 cout << "Sales record:  " << tmpShop->salesRecord << endl;
                 if (tmpShop->salesRecord >= 55) {
                     string newShopName = "SHOP" + to_string(1 + shops.size());
-                    cout << newShopName << endl;
+                    cout << "new shop: " + newShopName + " created!" << endl;
                     shop *newShop = new shop(newShopName);
                     shops.push_back(newShop);
                     tmpShop->salesRecord -= 55;
@@ -128,7 +128,7 @@ public:
             }
             out = split(bufferStr, ' ', '\t');
             item newItem = item(out[0], stof(out[1]), stoi(out[2]), str2Time(out[3]));
-            tmpShop->wh->supplyItem(newItem);
+            tmpShop->purchase(newItem);
         }
         cout << "load finish" << endl;
     }
@@ -166,7 +166,7 @@ public:
             }
             out = split(bufferStr, ' ', '\t');
             item newItem = item(out[0], stof(out[1]), stoi(out[2]), str2Time(out[3]));
-            tmpShop->wh->supplyItem(newItem);
+            tmpShop->purchase(newItem);
         }
         cout << "purchase finish" << endl;
     }

@@ -7,9 +7,8 @@
 
 /* Warehouse Util */
 using namespace std;
-enum WarehouseSize {
-    BIG, MID, SMALL, NO
-};
+
+
 const int bigsize = 100;
 const int midsize = 50;
 const int smlsize = 25;
@@ -17,6 +16,9 @@ const int nosize = 0;
 
 enum op {
     SELL, PURCHASE,
+};
+enum WarehouseSize {
+    BIG, MID, SMALL, NO
 };
 
 class warehouse {
@@ -27,8 +29,13 @@ private:
 public:
     warehouse(int sizeOfWarehouse) {
         cout << "warehouse 􏰄constructor is i􏰀nvok􏰄􏰅ed" << endl;
-        if (this == nullptr)
-            maxSize = sizeOfWarehouse;
+        maxSize = sizeOfWarehouse;
+    }
+
+    warehouse(int sizeOfWarehouse, vector<item> items) {
+        cout << "warehouse 􏰄constructor is i􏰀nvok􏰄􏰅ed" << endl;
+        maxSize = sizeOfWarehouse;
+        this->items = items;
     }
 
     ~warehouse() {
@@ -37,15 +44,20 @@ public:
 
     int getSize() { return items.size(); }
 
-    void useItem(item item1) {
+    int getMaxSize() {
+        return maxSize;
+    }
+
+    vector<item> getItems() { return items; }
+
+    bool useItem(item item1) {
         vector<item>::iterator it;
         for (it = items.begin(); it != items.end(); ++it) {
             if (item1.equals(*it)) {
                 cout << "sell " + (*it).name << endl;
                 items.erase(it);
 //                check the warehouse for maxSize change
-                checkWarehouseSize(SELL);
-                break;
+                return checkWarehouseSize(SELL);
             }
         }
     }
@@ -60,21 +72,24 @@ public:
         return noitem();
     }
 
-    void supplyItem(item item1) {
+    bool supplyItem(item item1) {
         items.push_back(item1);
-        checkWarehouseSize(PURCHASE);
+        return checkWarehouseSize(PURCHASE);
     }
 
-    void checkWarehouseSize(op operation) {
+    bool checkWarehouseSize(op operation) {
         int nowSize = getSize();
         cout << "nowSize: " << getSize() << endl;
         if (operation == SELL && (nowSize == 0 || nowSize == 25 || nowSize == 50)) {
             cout << "sell change maxSize " << endl;
             getSmallerWarehouse();
+            return true;
         } else if (operation == PURCHASE && (nowSize == 1 || nowSize == 26 || nowSize == 51)) {
             cout << "purchase change maxSize " << endl;
             getBiggerWarehouse();
+            return true;
         }
+        return false;
     }
 
     WarehouseSize getType() {
@@ -91,7 +106,9 @@ public:
     }
 
     void getBiggerWarehouse() {
-        if (this->maxSize == smlsize) {
+        if (this->maxSize == nosize) {
+            this->maxSize = smlsize;
+        } else if (this->maxSize == smlsize) {
             this->maxSize = midsize;
         } else if (this->maxSize == midsize) {
             this->maxSize = bigsize;

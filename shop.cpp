@@ -14,6 +14,10 @@ extern const int midsize;
 extern const int smlsize;
 extern const int nosize;
 
+vector<item> copyVec;
+
+warehouse *copyWarehouse(warehouse* wh);
+
 class shop {
 public:
     string name;
@@ -23,7 +27,12 @@ public:
     void sell(item item1, float discount) {
         if (this->wh != nullptr) {
             salesRecord += discount * item1.price;
-            wh->useItem(item1);
+            bool whSizeChanged = wh->useItem(item1);
+            if (whSizeChanged) {
+                this->wh = copyWarehouse(wh);
+            } else
+                return;
+            cout << copyVec.size() << endl;
             if (this->wh->getSize() == 0) {
                 delete this->wh;
                 this->wh = nullptr;
@@ -32,10 +41,20 @@ public:
     }
 
     void purchase(item item1) {
+        if (this->wh->getSize() >= 100) {
+            cout << "warehouse full!" << endl;
+            return;
+        }
         if (this->wh == nullptr) {
             this->wh = noWarehouse();
         }
-        wh->supplyItem(item1);
+
+        bool whSizeChanged = wh->supplyItem(item1);
+        if (whSizeChanged) {
+            this->wh = copyWarehouse(wh);
+        } else
+            return;
+        cout << copyVec.size() << endl;
     }
 
     shop(string name) {
@@ -67,3 +86,12 @@ public:
         }
     };
 };
+
+warehouse *copyWarehouse(warehouse* wh) {
+    copyVec.clear();
+    vector<item> v2 = wh->getItems();
+    copyVec.insert(copyVec.end(), v2.begin(), v2.end());
+    int maxSize = wh->getMaxSize();
+    delete wh;
+    return new warehouse(maxSize, copyVec);
+}
