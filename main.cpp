@@ -1,11 +1,12 @@
 #include "main.h"
 
 using namespace std;
+string ppwd;
 
 void readFromCin(familyMart familyMart1) {
-    string str;
-    string ppwd = getCurrentParentDir();
     vector<string> vec;
+    string str = "";
+
     while (getline(cin, str)) {
         string::size_type idx0 = str.find("purchase file");
         string::size_type idx1 = str.find("sell file");
@@ -21,15 +22,15 @@ void readFromCin(familyMart familyMart1) {
             string fileName = vec[1];
             familyMart1.loadFromSellFile(ppwd + fileName);
         } else if (idx2 != string::npos) {
-            int saleTotal = 0;
+            float saleTotal = 0;
             for (auto shopx: familyMart1.shops) {
-                saleTotal += shopx.salesRecord;
+                saleTotal += shopx->salesRecord;
             }
             cout << saleTotal << endl;
         } else if (idx3 != string::npos) {
             string allNames;
             for (auto shopx: familyMart1.shops) {
-                allNames += shopx.name + '\t';
+                allNames += (string) (shopx->name + '\t');
             }
             cout << allNames << endl;
         } else if (idx4 != string::npos) {
@@ -48,7 +49,7 @@ int main() {
 //        std::cout << " " << a[i];
 //    std::cout << std::endl;
     familyMart familyMart1;
-    string ppwd = getCurrentParentDir();
+    ppwd = getCurrentParentDir();
     cout << ppwd << endl;
     familyMart1.loadFromShopFile(ppwd + "shop.txt");
 //    familyMart1.loadFromSellFile(ppwd + "sell.txt");

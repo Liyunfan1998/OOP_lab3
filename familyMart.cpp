@@ -18,7 +18,7 @@ const time_t str2Time(string dateStr);
 class familyMart {
 
 public:
-    vector<shop> shops;
+    vector<shop *> shops;
 
     vector<string> loadFromFile(string filePath) {
         vector<string> out;
@@ -36,9 +36,9 @@ public:
         return out;
     }
 
-    shop getShopByName(string shopName) {
+    shop *getShopByName(string shopName) {
         for (auto shop :shops) {
-            if (shop.name == shopName) {
+            if (shop->name == shopName) {
                 return shop;
             }
         }
@@ -49,7 +49,7 @@ public:
         char buffer[256];
         vector<string> out;
         float discount;
-        shop tmpShop = shop("");
+        shop *tmpShop = new shop("");
         ifstream in(filePath);
         if (!in.is_open()) {
             cout << "Error opening file";
@@ -65,6 +65,8 @@ public:
             if (idx1 != string::npos) {
                 out = split(bufferStr, ' ', '\t');
                 string::size_type idx2 = out[1].find("SHOP");
+                if (tmpShop->name == "")
+                    delete tmpShop;
                 if (idx2 != string::npos) {
                     discount = 1;
                     tmpShop = getShopByName(out[1]);
@@ -74,17 +76,20 @@ public:
                 }
                 continue;
             } else {
-                item item1 = tmpShop.wh->getItemOfCertainTypeRandomly(bufferStr);
+                item item1 = tmpShop->wh->getItemOfCertainTypeRandomly(bufferStr);
                 if (item1.type == noType) {
                     cout << "no item(" << bufferStr << ") left" << endl;
+                    cout << "Sales record:  " << tmpShop->salesRecord << endl;
                     continue;
                 }
-                tmpShop.sell(item1, discount);
-                cout << "Sales record:  " << tmpShop.salesRecord << endl;
-                if (tmpShop.salesRecord >= 55) {
-                    shop newShop = shop("SHOP" + (shops.size() + 1));
+                tmpShop->sell(item1, discount);
+                cout << "Sales record:  " << tmpShop->salesRecord << endl;
+                if (tmpShop->salesRecord >= 55) {
+                    string newShopName = "SHOP" + to_string(1 + shops.size());
+                    cout << newShopName << endl;
+                    shop *newShop = new shop(newShopName);
                     shops.push_back(newShop);
-                    tmpShop.salesRecord -= 55;
+                    tmpShop->salesRecord -= 55;
                 }
             }
         }
@@ -93,9 +98,8 @@ public:
 
     void loadFromShopFile(string filePath) {
         vector<string> out;
-        shop tmpShop = shop("");
+        shop *tmpShop = new shop("");
         char buffer[256];
-
         ifstream in(filePath);
         if (!in.is_open()) {
             cout << "Error opening file";
@@ -107,8 +111,10 @@ public:
             string::size_type idx1 = bufferStr.find("SHOP");
             if (idx1 != string::npos) {
                 out = split(bufferStr, ' ', '\t');
-                shop shop1 = shop(out[0],out[1]);
+                shop *shop1 = new shop(out[0], out[1]);
                 shops.push_back(shop1);
+                if (tmpShop->name == "")
+                    delete tmpShop;
                 tmpShop = shop1;
                 continue;
             }
@@ -122,14 +128,14 @@ public:
             }
             out = split(bufferStr, ' ', '\t');
             item newItem = item(out[0], stof(out[1]), stoi(out[2]), str2Time(out[3]));
-            tmpShop.wh->supplyItem(newItem);
+            tmpShop->wh->supplyItem(newItem);
         }
         cout << "load finish" << endl;
     }
 
     void loadFromPurchaseFile(string filePath) {
         vector<string> out;
-        shop tmpShop = shop("");
+        shop *tmpShop = new shop("");
         char buffer[256];
 
         ifstream in(filePath);
@@ -146,6 +152,7 @@ public:
             string::size_type idx1 = bufferStr.find("PURCHASE");
             if (idx1 != string::npos) {
                 out = split(bufferStr, ' ', '\t');
+                delete tmpShop;
                 tmpShop = getShopByName(out[2]);
                 continue;
             }
@@ -159,7 +166,7 @@ public:
             }
             out = split(bufferStr, ' ', '\t');
             item newItem = item(out[0], stof(out[1]), stoi(out[2]), str2Time(out[3]));
-            tmpShop.wh->supplyItem(newItem);
+            tmpShop->wh->supplyItem(newItem);
         }
         cout << "purchase finish" << endl;
     }

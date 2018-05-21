@@ -26,7 +26,13 @@ private:
 
 public:
     warehouse(int sizeOfWarehouse) {
-        maxSize = sizeOfWarehouse;
+        cout << "warehouse 􏰄constructor is i􏰀nvok􏰄􏰅ed" << endl;
+        if (this == nullptr)
+            maxSize = sizeOfWarehouse;
+    }
+
+    ~warehouse() {
+        cout << "warehouse dec􏰄􏰀struct􏰄or is i􏰀nvok􏰄􏰅ed" << endl;
     }
 
     int getSize() { return items.size(); }
